@@ -1,0 +1,27 @@
+name: GitHub Pages deploy
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Use Node.js 16
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Build
+      run: export NODE_OPTIONS=--max_old_space_size=6144  && yarn install --ignore-engines && npm run build
+    
+    - name: Deploy to GitHub Pages
+      uses: Cecilapp/GitHub-Pages-deploy@v3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        email: sudipbhattarai100@gmail.com
+        build_dir: out/
