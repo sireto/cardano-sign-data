@@ -99,9 +99,10 @@ const Deploy: React.FC<DeployProps> = ({ connectedWallet }) => {
         try {
             const wallet = (await connectedWallet.enable()).instance
             const usedAddress = await wallet.getUsedAddresses()
+            console.log(usedAddress[0])
             const rewardAddress = await wallet.getRewardAddresses()
-            const hexData = toHexLocal(data)
-            const signResponse = await wallet.signData(rewardAddress[0], hexData)
+            const hexData = data.split("").map((c)=>c.charCodeAt().toString(16)).join("");
+            const signResponse = await wallet.signData(usedAddress[0], hexData)
             console.log("Signature Response: " + JSON.stringify(signResponse));
             const verifySignature = testpk(signResponse?.signature,  signResponse?.key)
             console.log("is Signature Valid? ", verifySignature);

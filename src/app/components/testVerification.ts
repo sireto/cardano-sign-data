@@ -14,7 +14,7 @@ const Network = {
   MAINNET: 1,
   TESTNET: 0,
 };
-const EDDSA = require("/home/reeshav/cnft_frontend/node_modules/@stricahq/bip32ed25519/dist/ed25519e");
+const EDDSA = require("/home/krunx/Cardano-Data-Signature/node_modules/@stricahq/bip32ed25519/dist/ed25519e");
 const eddsa = new EDDSA();
 
 const buffer_1 = require("buffer");
